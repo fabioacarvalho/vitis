@@ -43,14 +43,18 @@ services:
     networks:
       - vitis_net
     command: >
-      sh -c "python manage.py migrate &&
+      sh -c "python manage.py makemigrations &&
+            python manage.py migrate &&
+            python manage.py collectstatic --noinput &&
             python manage.py runserver 0.0.0.0:8000"
 
   # front:
   #   build: ./frontend
   #   volumes:
   #     - ./frontend:/app
-  #   command: npm run dev -- --host=0.0.0.0 --port=3000
+  #   command: >
+  #     sh -c "npm i &&
+  #           npm run dev -- --host=0.0.0.0 --port=3000"
   #   ports:
   #     - "3000:3000"
   #   depends_on:
@@ -64,6 +68,23 @@ services:
   #     - "80:80"
   #   depends_on:
   #     - frontend
+  #   networks:
+  #     - vitis_net
+
+  redis:
+    image: redis:latest
+    container_name: redis_broker
+    ports:
+      - "6379:6379"
+    networks:
+      - vitis_net
+
+  # worker:
+  #   build: .
+  #   container_name: celery_worker
+  #   command: sh -c "sleep 10 && celery -A celery_worker.celery worker --loglevel=info"
+  #   depends_on:
+  #     - redis
   #   networks:
   #     - vitis_net
 

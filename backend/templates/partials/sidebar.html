@@ -1,0 +1,32 @@
+{% load base_tags %}
+<!-- Sidebar-->
+<div class="border-end bg-white" id="sidebar-wrapper">
+    <div class="sidebar-heading border-bottom bg-light"><i class="fi fi-rs-rocket-lunch"></i> <a class="text-decoration-none text-black" href="{% url 'vitis:dashboard' %}">ERP</a> </div>
+    <div class="list-group list-group-flush">
+        
+        {% menu request.user.id as menus %}
+        {% for menu in menus %}
+            {% linkurl menu.url as url %}
+            {% if url and url.0 and url.1 %}
+                <a class="list-group-item list-group-item-action list-group-item-light p-3" href="{% url 'vitis:changelist' url.0 url.1 %}">
+                    <i class="fi {{ menu.icon }}"></i> {{ menu.name }}
+                </a>
+            {% else %}
+                <p>Erro: URL inválida para {{ menu.name }}</p>
+            {% endif %}
+        {% endfor %}
+        {% comment %} {% menu request.user.id as menus %}
+        {% for menu in menus %}
+            {% linkurl menu.url as url %}
+            <a class="list-group-item list-group-item-action list-group-item-light p-3" href="{% url 'vitis:changelist' url.0 url.1 %}"><i class="fi {{ menu.icon }}"></i> {{ menu.name }}</a>
+        {% endfor %} {% endcomment %}
+
+        <!-- <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!">Dashboard</a>
+        <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!">Shortcuts</a>
+        <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!">Overview</a>
+        <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!">Events</a>
+        <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!">Profile</a>
+        <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!">Status</a> -->
+        <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/admin/auth/user/{{ request.user.id }}">Profile</a>
+    </div>
+</div>

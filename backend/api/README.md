@@ -1,0 +1,1 @@
+To use api put in your path `api/` + api path

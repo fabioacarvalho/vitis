@@ -56,14 +56,22 @@ THIRD_PARTY_APPS = [
     'rest_framework',
     'rest_framework_simplejwt',
     'corsheaders',  # Se estiver usando CORS
+    "django_bootstrap5",
+    "crispy_forms",
+    "crispy_bootstrap5", 
+]
+
+API_APPS = [
+    "login",
+    "core",
+    "api",
 ]
 
 MY_APPS = [
-    "core",
-    "login",
+    "base",
 ]
 
-INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + MY_APPS
+INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + API_APPS + MY_APPS
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
@@ -105,7 +113,7 @@ ROOT_URLCONF = "setup.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [],
+        "DIRS": [os.path.join(BASE_DIR, "templates")],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -134,6 +142,18 @@ DATABASES = {
         'PORT': os.getenv('POSTGRES_PORT', '5432'),
     }
 }
+
+# Redis
+# CACHES = {
+#     'default': {
+#         'BACKEND': 'django_redis.cache.RedisCache',
+#         'LOCATION': 'redis://redis:6379/1',  # Alterar de 127.0.0.1 para o nome do serviço 'redis'
+#         'OPTIONS': {
+#             'CLIENT_CLASS': 'django_redis.client.DefaultClient'
+#         }
+#     },
+#     'KEY_PREFIX': 'django_redis_cache'
+# }
 
 
 # Password validation
@@ -170,7 +190,9 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
-STATIC_URL = "static/"
+STATIC_URL = 'static/'
+STATICFILES_DIRS = [os.path.join(BASE_DIR, "static"), ]
+STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles_build", "static")
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field

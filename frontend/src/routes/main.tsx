@@ -10,7 +10,7 @@ import Items from "../pages/Items";
 import Login from "../pages/Login";
 import SignUp from "../pages/Signup";
 import Users from "../pages/Users";
-import EmissionFactors from "../pages/Parameters/EmissionFactors";
+
 import Company from "../pages/Settings/Company";
 import CompanyChangeForm from "../pages/Settings/Company/Changeform";
 
@@ -28,7 +28,4 @@ export const routes: RouteConfig[] = [
   { path: "/settings/users", element: <Users />, errorElement: <Error />, private: true },
   { path: "/settings/company", element: <Company />, errorElement: <Error />, private: true },
   { path: "/settings/company/add", element: <CompanyChangeForm />, errorElement: <Error />, private: true },
-
-  // Parameters
-  { path: "/parameters/emission-factors", element: <EmissionFactors />, errorElement: <Error />, private: true },
 ];

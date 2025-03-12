@@ -1,0 +1,32 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+    {% include "partials/head.html" %}
+
+    <body >
+        <div class="d-flex" id="wrapper">
+
+            <!-- Sidebar-->
+            {% include "partials/sidebar.html" %}
+            
+            <div id="page-content-wrapper">
+
+                <div id="page-content-wrapper">
+                    <!-- Top navigation-->
+                    {% include "partials/navbar.html" %}
+
+                    <!-- Page content-->
+                    <div class="container-fluid">
+                        {% block content %}
+                            <h1 class="mt-4">{{ title|default:"" }}</h1>
+                        {% endblock content %}        
+                    </div>                
+                    
+                    {% include "partials/footer.html" %}
+                </div>                
+            </div>
+        </div>
+
+    </body>
+
+</html>

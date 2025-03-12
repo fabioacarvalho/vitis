@@ -17,14 +17,14 @@ Including another URLconf
 
 from django.contrib import admin
 from django.urls import path, include,re_path
+from django.conf import settings
+from django.conf.urls.static import static
 
 
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 from rest_framework import permissions
 from drf_yasg.views import get_schema_view
 from drf_yasg import openapi
-
-from login.views import SignInView, SignUpView
 
 
 schema_view = get_schema_view(
@@ -41,7 +41,7 @@ schema_view = get_schema_view(
     permission_classes=(permissions.AllowAny,),
 )
 
-app_name = 'api'
+app_name = 'vitis'
 
 urlpatterns = [
     path("admin/", admin.site.urls),
@@ -55,12 +55,11 @@ urlpatterns = [
     path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
 
-    # Login
-    path('sign-in/', SignInView.as_view(), name="signin"),
-    path('sign-out/', SignInView.as_view(), name="signout"),
+    # API
+    path('api/', include("api.urls", namespace='api')),
 
-    # Core
-    path('core/', include('core.urls', namespace='core')),
+    # Apps
+    path('vitis/', include(('views.urls', 'vitis'), namespace='vitis')), 
 
 ]
 
