@@ -1,0 +1,16 @@
+{
+    "name": "React Vite TypeScript Dev Container",
+    // "dockerFile": "../../Dockerfile",
+    // "context": "../..",
+    // "runArgs": ["-p", "3000:3000"],
+    "dockerComposeFile": ["../../docker-compose.yml"],
+    "service": "front",
+    "workspaceFolder": "/app",
+    "postCreateCommand": "npm install",
+    "portsAttributes": {
+        "3000": {
+            "label": "React App",
+            "onAutoForward": "notify"
+        }
+    }
+}
