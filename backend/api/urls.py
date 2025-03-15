@@ -29,6 +29,9 @@ urlpatterns = [
     path('sign-in/', SignInView.as_view(), name="signin"),
     path('sign-out/', SignUpView.as_view(), name="signout"),
 
+    # User
+    path("users/", include('login.urls', namespace='users')),
+
     # Core
     path('core/', include('core.urls', namespace='core')),
 

@@ -14,6 +14,7 @@ from django.utils.crypto import get_random_string
 from .models import CompanyInvitation, CompanyUser
 from .serializers import CompanyInvitationSerializer, CompanyUserSerializer, SignInSerializer
 from rest_framework.permissions import IsAuthenticated
+from core.permissions import IsCompanyUser
 
 
 def generate_invitation_token(length=32):
@@ -144,23 +145,27 @@ class UserListView(APIView):
     """
     API View para listar todos os usuários ou obter um usuário específico por ID.
     """
+    permission_classes = [IsAuthenticated, IsCompanyUser]
 
     def get(self, request, user_id=None):
         # Se o user_id for fornecido, busca um usuário específico
         if user_id:
             try:
-                user = User.objects.get(id=user_id)
+                user = CompanyUser.objects.get(id=user_id)
                 data = {
                     "id": user.id,
                     "username": user.username,
                     "email": user.email,
+                    "role": user.role,
+                    "company": user.company,
+                    "is_company_admin": user.is_company_admin,
                 }
                 return Response(data, status=status.HTTP_200_OK)
-            except User.DoesNotExist:
+            except CompanyUser.DoesNotExist:
                 return Response({"detail": "User not found"}, status=status.HTTP_404_NOT_FOUND)
         else:
             # Se não for fornecido um user_id, retorna todos os usuários
-            users = User.objects.all()
+            users = CompanyUser.objects.all()
             data = [
                 {
                     "id": user.id,

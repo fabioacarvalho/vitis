@@ -4,10 +4,10 @@ from drf_yasg import openapi
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework.permissions import IsAuthenticated
+from clients.permissions import IsCompanyUser
 
 from clients.serializers import ClientSerializer
 from clients.services import ClientService
-from clients.permissions import IsCompanyUser  # Importe a permissão
 
 
 # Views para Clients
