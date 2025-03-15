@@ -6,7 +6,8 @@
     "dockerComposeFile": ["../../docker-compose.yml"],
     "service": "front",
     "workspaceFolder": "/app",
-    "postCreateCommand": "npm install",
+    // "postCreateCommand": "npm install",
+    "postCreateCommand": "bash",
     "portsAttributes": {
         "3000": {
             "label": "React App",

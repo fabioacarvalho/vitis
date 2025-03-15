@@ -31,5 +31,17 @@ urlpatterns = [
 
     # Core
     path('core/', include('core.urls', namespace='core')),
+
+    # Clients
+    path('clients/', include('clients.urls', namespace='clients')),
+
+    # Sales
+    path('sales/', include('sales.urls', namespace='sales')),
+
+    # Marketing
+    path('marketing/', include('marketing.urls', namespace='marketing')),
+
+    # Success
+    path('success/', include('success.urls', namespace='success')),
 ]
 
