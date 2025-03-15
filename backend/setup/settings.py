@@ -64,12 +64,14 @@ THIRD_PARTY_APPS = [
 API_APPS = [
     "login",
     "core",
+    "companies",
+    "sales",
+    "marketing",
+    "success",
     "api",
 ]
 
-MY_APPS = [
-    "base",
-]
+MY_APPS = []
 
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + API_APPS + MY_APPS
 
@@ -113,7 +115,7 @@ ROOT_URLCONF = "setup.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [os.path.join(BASE_DIR, "templates")],
+        "DIRS": [],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [

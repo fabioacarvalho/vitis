@@ -57,9 +57,6 @@ urlpatterns = [
 
     # API
     path('api/', include("api.urls", namespace='api')),
-
-    # Apps
-    path('vitis/', include(('views.urls', 'vitis'), namespace='vitis')), 
-
+    
 ]
 
